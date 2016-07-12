@@ -9,3 +9,9 @@
 <p>
   <%= @restaurant.rating %>
 </p>
+
+
+
+
+<%= button_to 'Delete', restaurant_path, method: "delete", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }
+%>
