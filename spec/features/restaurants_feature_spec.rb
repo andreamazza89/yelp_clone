@@ -19,4 +19,24 @@ feature 'Restaurant features' do
       expect(page).to have_content("Andrea's Bistro")
     end
   end
+
+  context 'A few restaurants have been created' do
+    
+    scenario 'index page shows the existing restaurants' do
+      visit('/restaurants/new')
+      fill_in('Name', with: "Andrea's Bistro")
+      fill_in('Description', with: "Fantastic")
+      fill_in('Rating', with: '5')
+      click_button('Save Restaurant')
+      visit('/restaurants/new')
+      fill_in('Name', with: "Restaurant 2")
+      fill_in('Description', with: "Fantastic")
+      fill_in('Rating', with: '5')
+      click_button('Save Restaurant')
+
+      visit('/restaurants')
+      expect(page).to have_content("Andrea's Bistro")
+      expect(page).to have_content("Restaurant 2")
+    end
+  end
 end

@@ -1,2 +1,8 @@
-No restaurants yet, please add one and get reviewing!
+<% if @restaurants.empty? %>
+  No restaurants yet, please add one and get reviewing!
+<% else %>
+  <% @restaurants.each do |restaurant| %>
+    <%= restaurant.name %><br>
+  <% end %>
+<% end %>
 <%= link_to 'Add a new restaurant', new_restaurant_path %>
