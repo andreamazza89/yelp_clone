@@ -1,0 +1,14 @@
+<h1>Restaurants#new</h1>
+<p>Find me in app/views/restaurants/new.html.erb</p>
+
+<%= form_for Restaurant.new do |r| %>
+
+<%= r.label :name %><br>
+<%= r.text_field :name %>
+
+<%= r.label :description %><br>
+<%= r.text_field :description %>
+
+<%= r.submit 'Save Restaurant' %><br>
+
+<% end %>
