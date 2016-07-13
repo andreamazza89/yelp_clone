@@ -14,7 +14,7 @@ feature 'Restaurant features' do
       visit('/restaurants/new')
       fill_in('Name', with: "Andrea's Bistro")
       fill_in('Description', with: "Fantastic")
-      fill_in('Rating', with: '5')
+      #fill_in('Rating', with: '5')
       click_button('Save Restaurant')
       expect(page).to have_content("Andrea's Bistro")
     end
@@ -22,11 +22,13 @@ feature 'Restaurant features' do
 
   context 'A few restaurants have been created' do
     let(:restaurant1) {{'Name' => "Andrea's Bistro",
-                        'Description' => "Fantastic",
-                        'Rating' => '5' }}
+                        'Description' => "Fantastic" #,
+                        #'Rating' => '5' 
+                        }}
     let(:restaurant2) {{'Name' => "Andrea's Cafe",
-                        'Description' => "Fantastic1",
-                        'Rating' => '5' }}
+                        'Description' => "Fantastic1" #,
+                        #'Rating' => '5' 
+                        }}
     before(:each) do
       create_new_restaurant(restaurant1)
       create_new_restaurant(restaurant2)
