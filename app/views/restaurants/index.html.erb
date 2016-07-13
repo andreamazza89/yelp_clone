@@ -4,6 +4,8 @@
   <% @restaurants.each do |restaurant| %>
     <%= restaurant.name %><br>
     <%= restaurant.description %><br>
+    <%= link_to 'View', restaurant %><br>
+    <hr>
   <% end %>
 <% end %>
 <%= link_to 'Add a new restaurant', new_restaurant_path %>

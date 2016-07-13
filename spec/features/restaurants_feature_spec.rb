@@ -2,6 +2,20 @@ require 'rails_helper'
 
 feature 'Restaurant features' do
 
+  let(:restaurant1) {{'Name' => "Andrea's Bistro",
+                      'Description' => "Fantastic"
+                    }}
+
+  let(:restaurant2) {{'Name' => "Andrea's Cafe",
+                      'Description' => "Fantastic1"
+                    }}
+
+  let(:restaurant3) {{'Name' => "Edited restaurant",
+                      'Description' => "Changed my mind"
+                    }}
+
+################################################################################
+
   context 'when no restaurants have been added' do
 
     scenario 'index page should contain a link to create a new restaurant' do
@@ -11,27 +25,18 @@ feature 'Restaurant features' do
     end
 
     scenario 'user can add a restaurant, then see it displayed on the page' do
-      visit('/restaurants/new')
-      fill_in('Name', with: "Andrea's Bistro")
-      fill_in('Description', with: "Fantastic")
-      #fill_in('Rating', with: '5')
-      click_button('Save Restaurant')
+      create_new_restaurant('/restaurants/new', restaurant1)
       expect(page).to have_content("Andrea's Bistro")
     end
   end
 
-  context 'A few restaurants have been created' do
-    let(:restaurant1) {{'Name' => "Andrea's Bistro",
-                        'Description' => "Fantastic" #,
-                        #'Rating' => '5' 
-                        }}
-    let(:restaurant2) {{'Name' => "Andrea's Cafe",
-                        'Description' => "Fantastic1" #,
-                        #'Rating' => '5' 
-                        }}
+################################################################################
+
+  context 'when a few restaurants have been created' do
+
     before(:each) do
-      create_new_restaurant(restaurant1)
-      create_new_restaurant(restaurant2)
+      create_new_restaurant('/restaurants/new', restaurant1)
+      create_new_restaurant('/restaurants/new', restaurant2)
     end
 
     scenario 'index page shows the existing restaurants' do
@@ -45,5 +50,10 @@ feature 'Restaurant features' do
       expect(page).to_not have_content(restaurant2['Name'])
     end
 
+    scenario 'user can edit a restaurant, this is updated' do
+      update_restaurant(restaurant3)
+      expect(page).to have_content("Edited restaurant")
+      expect(page).to_not have_content("Andrea's Cafe")
+    end
   end
 end
