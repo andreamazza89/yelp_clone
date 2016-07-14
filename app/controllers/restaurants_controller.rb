@@ -16,6 +16,7 @@ class RestaurantsController < ApplicationController
     if @restaurant.save 
       redirect_to restaurant_path(@restaurant)
     else
+      flash[:alert] = @restaurant.errors.full_messages
       render 'new' 
     end
   end
@@ -33,6 +34,7 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
+    flash[:notice] = 'Restaurant deleted succesfully'
     redirect_to restaurants_path
   end
 

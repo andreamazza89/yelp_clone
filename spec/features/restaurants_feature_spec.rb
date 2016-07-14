@@ -24,7 +24,6 @@ feature 'Restaurant features' do
       fill_in('Name', with: 'kf')
       click_button 'Create Restaurant'
       expect(page).not_to have_content('kf')
-      expect(page).to have_content('error')
     end
 
     scenario 'index page should invite first user to add a restaurant' do
