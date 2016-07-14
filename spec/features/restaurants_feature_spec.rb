@@ -18,6 +18,15 @@ feature 'Restaurant features' do
 
   context 'when no restaurants have been added' do
 
+    scenario 'user cannot submit a name that is too short' do
+      visit('/restaurants')
+      click_link 'Add a new restaurant'
+      fill_in('Name', with: 'kf')
+      click_button 'Create Restaurant'
+      expect(page).not_to have_content('kf')
+      expect(page).to have_content('error')
+    end
+
     scenario 'index page should invite first user to add a restaurant' do
       visit('/restaurants')
       expect(page).to have_content('No restaurants yet, please add one and get reviewing!')

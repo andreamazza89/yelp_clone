@@ -1,2 +1,12 @@
 <h1> Add a restaurant </h1>
+<% if @restaurant.errors.any? %>
+  <section id='errors'>
+    <h2> <%= pluralize(@restaurant.errors.count, 'error') %> prohibited this restaurant from being saved: </h2>
+    <ul>
+      <% @restaurant.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
 <%= render 'form' %>

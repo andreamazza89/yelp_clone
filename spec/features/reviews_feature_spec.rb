@@ -1,21 +1,14 @@
 describe 'Review features' do
 
-  let(:restaurant1) {{'Name'        => "Andrea's Bistro",
-                      'Description' => "Fantastic"
-                    }}
+  before { Restaurant.create name: 'KFC' }
 
-  let(:review1)     {{'Content' => "Loved it",
-                      'rating'  => 5
-                    }}
-
-  xscenario 'user can add a restaurant review and see it displayed on the main page' do
-    create_new_restaurant('/restaurants/new', restaurant1)
+  scenario 'user can add a restaurant review and see it displayed on the main page' do
     visit('/restaurants');
-    click_button('Add review')
-    fill_in('Content', 'Loved it')
-    fill_in('rating', 5)
+    click_link('Add review')
+    fill_in('Thoughts', with: 'Loved it')
+    select('5', from: 'Rating')
     click_button('Save Review')
-    
-    
+    visit('/restaurants') 
+    expect(page).to have_content('Loved it') 
   end
 end
